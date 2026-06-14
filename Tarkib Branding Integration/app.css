@@ -1,0 +1,439 @@
+/* Tarkib — Android TV Remote · design tokens + screen components
+   Dark-mode only, hardware-inspired. All screens are 412×892 logical px. */
+
+:root {
+  --bg: #0A0A0A;
+  --surface: #1A1A1A;
+  --elev: #2A2A2A;
+  --accent: #FF6B35;
+  --accent-muted: rgba(255, 107, 53, 0.13);
+  --text: #FFFFFF;
+  --text-sec: #888888;
+  --border: #2A2A2A;
+  --success: #4CAF50;
+  --error: #F44336;
+  --trackpad: #141414;
+  --radius: 12px;
+  --pad: 20px;
+  --font: -apple-system, "Roboto", "Segoe UI", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+.screen {
+  width: 412px;
+  height: 892px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Status bar ─────────────────────────────────────────── */
+.statusbar {
+  height: 44px;
+  flex: 0 0 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px 0 28px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  z-index: 5;
+}
+.statusbar .sb-icons {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* ── App bar (screen header) ────────────────────────────── */
+.appbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 56px;
+  flex: 0 0 auto;
+  padding: 4px var(--pad) 0;
+}
+.appbar .title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--text);
+}
+.appbar .spacer { flex: 1 1 auto; }
+
+.iconbtn {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--text);
+  border: none;
+  flex: 0 0 auto;
+  cursor: pointer;
+  transition: background .15s, transform .08s;
+}
+.iconbtn.surface {
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.iconbtn:active { transform: scale(0.94); }
+
+/* ── Body ───────────────────────────────────────────────── */
+.body {
+  flex: 1 1 auto;
+  padding: 0 var(--pad);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* ── Gesture nav pill ───────────────────────────────────── */
+.gesturenav {
+  height: 26px;
+  flex: 0 0 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gesturenav::after {
+  content: "";
+  width: 132px;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* ── Typography helpers ─────────────────────────────────── */
+.t-title   { font-size: 20px; font-weight: 600; letter-spacing: -0.2px; }
+.t-label   { font-size: 16px; font-weight: 500; color: var(--text); }
+.t-hint    { font-size: 13px; font-weight: 400; color: var(--text-sec); line-height: 1.45; }
+.t-btn     { font-size: 14px; font-weight: 500; }
+.t-section {
+  font-size: 11px; font-weight: 600; letter-spacing: 1.4px;
+  text-transform: uppercase; color: var(--text-sec);
+}
+.mono { font-family: "SF Mono", "Roboto Mono", ui-monospace, monospace; }
+
+/* ── Buttons ────────────────────────────────────────────── */
+.btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  height: 52px; border-radius: var(--radius); border: none;
+  font-family: var(--font); font-size: 16px; font-weight: 600;
+  cursor: pointer; width: 100%; transition: transform .08s, background .15s;
+}
+.btn:active { transform: scale(0.98); }
+.btn-accent { background: var(--accent); color: #0A0A0A; }
+.btn-ghost  { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+
+/* ── TV card ────────────────────────────────────────────── */
+.tvcard {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 15px 16px;
+}
+.tvcard .tv-ico {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: var(--trackpad);
+  display: flex; align-items: center; justify-content: center;
+  flex: 0 0 auto;
+}
+.tvcard .tv-meta { flex: 1 1 auto; min-width: 0; }
+.tvcard .tv-name { font-size: 16px; font-weight: 500; color: var(--text); }
+.tvcard .tv-ip   { font-size: 13px; color: var(--text-sec); margin-top: 2px; }
+
+.pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.4px;
+  padding: 4px 9px; border-radius: 20px;
+}
+.pill-accent { background: var(--accent-muted); color: var(--accent); }
+
+.dot { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; }
+.dot-green { background: var(--success); }
+.dot-grey  { background: var(--text-sec); }
+
+/* ── Inputs ─────────────────────────────────────────────── */
+.field {
+  display: flex; align-items: center; gap: 10px;
+  height: 52px; border-radius: var(--radius);
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 0 14px;
+}
+.field.focus { border-color: var(--accent); }
+.field input,
+.field .input-text {
+  flex: 1 1 auto; background: transparent; border: none; outline: none;
+  color: var(--text); font-family: var(--font); font-size: 16px;
+}
+.field .ph { color: var(--text-sec); }
+
+/* ── Scan rings animation ───────────────────────────────── */
+.scanwrap {
+  position: relative; width: 220px; height: 220px;
+  display: flex; align-items: center; justify-content: center;
+}
+.scanwrap .ring {
+  position: absolute; inset: 0; margin: auto;
+  width: 64px; height: 64px; border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  animation: scanpulse 2.4s cubic-bezier(.2,.6,.4,1) infinite;
+  opacity: 0;
+}
+.scanwrap .ring.r2 { animation-delay: .8s; }
+.scanwrap .ring.r3 { animation-delay: 1.6s; }
+@keyframes scanpulse {
+  0%   { transform: scale(1);   opacity: .8; }
+  70%  { opacity: .12; }
+  100% { transform: scale(3.2); opacity: 0; }
+}
+.scanwrap .scan-core {
+  width: 64px; height: 64px; border-radius: 18px;
+  background: var(--surface); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 2;
+}
+
+/* ── Spinner ────────────────────────────────────────────── */
+.spinner {
+  width: 56px; height: 56px; border-radius: 50%;
+  border: 3px solid var(--elev);
+  border-top-color: var(--accent);
+  animation: spin .9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Step indicator ─────────────────────────────────────── */
+.steps { display: flex; align-items: center; gap: 0; }
+.steps .step { display: flex; flex-direction: column; align-items: center; gap: 7px; }
+.steps .step-dot {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600;
+  border: 1.5px solid var(--border); color: var(--text-sec); background: var(--surface);
+}
+.steps .step.active .step-dot { border-color: var(--accent); color: var(--accent); }
+.steps .step.done .step-dot   { border-color: var(--success); background: var(--success); color: #0A0A0A; }
+.steps .step-label { font-size: 11px; font-weight: 500; letter-spacing: 0.3px; color: var(--text-sec); }
+.steps .step.active .step-label { color: var(--accent); }
+.steps .step.done .step-label   { color: var(--text); }
+.steps .step-line { flex: 1 1 auto; height: 1.5px; background: var(--border); margin: 0 6px; margin-bottom: 18px; }
+.steps .step-line.done { background: var(--success); }
+
+/* PIN boxes */
+.pinrow { display: flex; gap: 12px; justify-content: center; }
+.pinbox {
+  width: 56px; height: 64px; border-radius: var(--radius);
+  background: var(--surface); border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; font-weight: 600; color: var(--text);
+}
+.pinbox.focus { border-color: var(--accent); }
+
+/* ── Remote: trackpad ───────────────────────────────────── */
+.trackpad {
+  position: relative;
+  background: var(--trackpad);
+  border-radius: 16px;
+  border: 1px solid #202020;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04),
+              inset 0 0 40px rgba(0,0,0,0.5),
+              0 1px 0 rgba(255,255,255,0.02);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.trackpad .tp-label {
+  position: absolute; top: 12px; left: 0; right: 0; text-align: center;
+}
+.trackpad .tp-hint {
+  position: absolute; bottom: 14px; left: 0; right: 0; text-align: center;
+  font-size: 12px; color: #555; letter-spacing: 0.3px;
+}
+.trackpad .tp-grain {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.025) 1px, transparent 0);
+  background-size: 9px 9px;
+  pointer-events: none;
+}
+
+/* ── Remote: D-pad ──────────────────────────────────────── */
+.dpad {
+  position: relative;
+  width: 232px; height: 232px;
+  margin: 0 auto;
+}
+.dpad .d-btn {
+  position: absolute;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text);
+  cursor: pointer;
+  transition: background .12s, transform .06s;
+}
+.dpad .d-btn:active { background: var(--elev); transform: scale(0.96); }
+.dpad .d-up    { top: 0; left: 76px; width: 80px; height: 76px;
+                 border-radius: 20px 20px 8px 8px; }
+.dpad .d-down  { bottom: 0; left: 76px; width: 80px; height: 76px;
+                 border-radius: 8px 8px 20px 20px; }
+.dpad .d-left  { left: 0; top: 76px; width: 76px; height: 80px;
+                 border-radius: 20px 8px 8px 20px; }
+.dpad .d-right { right: 0; top: 76px; width: 76px; height: 80px;
+                 border-radius: 8px 20px 20px 8px; }
+.dpad .d-ok {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 84px; height: 84px; border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 6px rgba(255,107,53,0.06), inset 0 1px 0 rgba(255,255,255,0.05);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; font-weight: 600; letter-spacing: 0.5px; color: var(--text);
+  cursor: pointer; z-index: 2; transition: background .12s, transform .06s;
+}
+.dpad .d-ok:active { background: var(--elev); transform: translate(-50%,-50%) scale(0.96); }
+
+/* ── Remote: button rows ────────────────────────────────── */
+.btnrow { display: flex; gap: 12px; }
+.rbtn {
+  flex: 1 1 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 5px; color: var(--text); cursor: pointer; padding: 11px 0;
+  transition: background .12s, transform .06s;
+}
+.rbtn:active { background: var(--elev); transform: scale(0.97); }
+.rbtn .rbtn-lbl { font-size: 11px; font-weight: 500; color: var(--text-sec); letter-spacing: 0.3px; }
+
+.mediarow { display: flex; gap: 10px; align-items: center; }
+.mbtn {
+  flex: 1 1 0;
+  height: 52px; border-radius: var(--radius);
+  background: var(--surface); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text); cursor: pointer; transition: background .12s, transform .06s;
+}
+.mbtn:active { background: var(--elev); transform: scale(0.96); }
+.mbtn.primary {
+  background: var(--accent); color: #0A0A0A; border-color: var(--accent);
+  flex: 1.3 1 0;
+}
+
+.volrow {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 6px; height: 56px;
+}
+.volrow .vbtn {
+  flex: 1 1 0; height: 100%; border-radius: 9px;
+  background: transparent; border: none; color: var(--text);
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  cursor: pointer; transition: background .12s;
+}
+.volrow .vbtn:active { background: var(--elev); }
+.volrow .vsep { width: 1px; height: 22px; background: var(--border); flex: 0 0 auto; }
+.volrow .vbtn.mute { flex: 0 0 56px; }
+
+/* zone label above remote groups */
+.zone-cap { font-size: 10px; font-weight: 600; letter-spacing: 1.4px;
+  text-transform: uppercase; color: #5a5a5a; margin: 0 0 8px 2px; }
+
+/* ── Connection-lost banner ─────────────────────────────── */
+.banner {
+  display: flex; align-items: center; gap: 11px;
+  background: var(--error);
+  color: #fff; padding: 12px 18px;
+  font-size: 14px; font-weight: 500;
+}
+.banner .b-action { margin-left: auto; font-weight: 600; opacity: .95; }
+
+/* ── Bottom sheet (keyboard) ────────────────────────────── */
+.sheet-scrim { position: absolute; inset: 0; background: rgba(0,0,0,0.55); z-index: 8; }
+.sheet {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 9;
+  background: var(--surface);
+  border-radius: 22px 22px 0 0;
+  border-top: 1px solid var(--border);
+  padding: 10px 20px 20px;
+  box-shadow: 0 -12px 40px rgba(0,0,0,0.5);
+}
+.sheet .handle { width: 40px; height: 4px; border-radius: 3px; background: var(--elev);
+  margin: 2px auto 16px; }
+
+/* Faux Android keyboard */
+.keyboard { background: #0E0E0E; border-radius: 14px; padding: 9px 6px; }
+.kbrow { display: flex; gap: 6px; justify-content: center; margin-bottom: 7px; }
+.kbrow:last-child { margin-bottom: 0; }
+.key {
+  flex: 1 1 0; height: 42px; border-radius: 7px;
+  background: var(--elev); color: var(--text);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 500;
+}
+.key.wide { flex: 1.7 1 0; }
+.key.space { flex: 5 1 0; }
+.key.fn { background: #202020; color: var(--text-sec); font-size: 13px; }
+
+/* ── Settings list ──────────────────────────────────────── */
+.set-group { margin-bottom: 24px; }
+.set-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.set-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 15px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.set-row:last-child { border-bottom: none; }
+.set-row .sr-main { flex: 1 1 auto; min-width: 0; }
+.set-row .sr-title { font-size: 15px; font-weight: 500; color: var(--text); }
+.set-row .sr-sub { font-size: 13px; color: var(--text-sec); margin-top: 2px; }
+.set-row.danger .sr-title { color: var(--error); }
+.set-row .sr-val { font-size: 14px; color: var(--text-sec); }
+.swipe-reveal {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 76px;
+  background: var(--error); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600;
+}
+
+/* ── Splash ─────────────────────────────────────────────── */
+.splash {
+  flex: 1 1 auto; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 22px;
+  position: relative;
+}
+.splash .wordmark { font-size: 21px; font-weight: 600; letter-spacing: -0.2px; }
+.splash .byline {
+  position: absolute; bottom: 80px; left: 0; right: 0; text-align: center;
+  font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-sec);
+}
+.splash .loadbar {
+  position: absolute; bottom: 0; left: 0; height: 3px; background: var(--accent);
+  animation: loadgrow 1.8s ease-out forwards;
+}
+@keyframes loadgrow { from { width: 0; } to { width: 100%; } }
+
+/* checkmark draw-on */
+.check-circle {
+  width: 96px; height: 96px; border-radius: 50%;
+  background: var(--accent-muted);
+  display: flex; align-items: center; justify-content: center;
+}
+.check-svg path {
+  stroke-dasharray: 30; stroke-dashoffset: 30;
+  animation: draw .6s .15s ease-out forwards;
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
